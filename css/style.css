@@ -12,6 +12,7 @@ body {
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    position: relative;
 }
 
 header {
@@ -77,4 +78,12 @@ main {
 
 .front-click {
     transform: rotateY(-180deg);
+}
+
+.relogio {
+    position: absolute;
+    right: 50px;
+    top: 120px;
+    font-size: 20px;
+    color: red;
 }

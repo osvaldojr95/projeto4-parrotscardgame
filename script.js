@@ -3,7 +3,7 @@ let paresCertos = [];
 let statusClick = false;
 let cartaSelecionada = null;
 let quantidadePares = null;
-let relogio = null;
+let timer = null;
 let jogadas = 0;
 
 askQuantidade();
@@ -70,7 +70,7 @@ function tipoGif(indice){
             break;
             
         case 6:
-            imagem = "<img src='resources/tripletsparrot.gif'>";
+            imagem = "<img src='resources/unicornparrot.gif'>";
             break;
             
         default:
@@ -83,6 +83,10 @@ function tipoGif(indice){
 
 function clickCarta(carta){
     const back = carta.querySelector(".back-face");
+
+    if(jogadas == 0){
+        timer = setInterval(contaTempo, 1000);
+    }
 
     if(back.classList.contains("back-click") === false){
         virarCarta (carta);
@@ -103,6 +107,7 @@ function clickCarta(carta){
         }
 
         if(paresCertos.length === quantidadePares){
+            clearTimeout(timer);
             setTimeout(jogoTerminou,1000);
         }
     }
@@ -121,5 +126,11 @@ function virarCarta(carta){
 }
 
 function jogoTerminou(){
-    alert(`Você ganhou em ${jogadas} jogadas!`);
+    const relogio = document.querySelector(".relogio");
+    alert(`Você ganhou em ${jogadas} jogadas e em ${relogio.innerHTML} segundos!`);
+}
+
+function contaTempo(){
+    const relogio = document.querySelector(".relogio");
+    relogio.innerHTML = parseInt(relogio.innerHTML) + 1;
 }
