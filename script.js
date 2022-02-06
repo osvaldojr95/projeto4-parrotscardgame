@@ -4,6 +4,7 @@ let statusClick = false;
 let cartaSelecionada = null;
 let quantidadePares = null;
 let relogio = null;
+let jogadas = 0;
 
 askQuantidade();
 
@@ -34,7 +35,7 @@ function insereCartas(quantidadeCartas){
 
     for(let i=0; i<quantidadeCartas; i++){
         main.innerHTML = main.innerHTML 
-            + `<div class='card par${cartas[i]}' onclick='clickCarta(this)'><div class="front-face face"><img src='resources/front.png'></div><div class='back-face face'>` 
+            + `<div class='card par${cartas[i]}' onclick='clickCarta(this)' data-identifier="card"><div class="front-face face" data-identifier="front-face"><img src='resources/front.png'></div><div class='back-face face' data-identifier="back-face">` 
             + tipoGif(cartas[i]) 
             + "</div></div>";
     }
@@ -85,14 +86,15 @@ function clickCarta(carta){
 
     if(back.classList.contains("back-click") === false){
         virarCarta (carta);
+        jogadas = jogadas + 1;
         if(statusClick === false){
             cartaSelecionada = carta;
             statusClick = true;
         }
         else if(cartaSelecionada.classList[1] !== carta.classList[1]){
             statusClick = false;
-            setTimeout(virarCarta,2000,cartaSelecionada);
-            setTimeout(virarCarta,2000,carta);
+            setTimeout(virarCarta,1000,cartaSelecionada);
+            setTimeout(virarCarta,1000,carta);
             cartaSelecionada = null
         }
         else {
@@ -101,7 +103,7 @@ function clickCarta(carta){
         }
 
         if(paresCertos.length === quantidadePares){
-            jogoTerminou();
+            setTimeout(jogoTerminou,1000);
         }
     }
 }
@@ -119,5 +121,5 @@ function virarCarta(carta){
 }
 
 function jogoTerminou(){
-    alert("JOGO TERMINOU");
+    alert(`Você ganhou em ${jogadas} jogadas!`);
 }
