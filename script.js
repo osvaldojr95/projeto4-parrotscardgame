@@ -128,6 +128,30 @@ function virarCarta(carta){
 function jogoTerminou(){
     const relogio = document.querySelector(".relogio");
     alert(`Você ganhou em ${jogadas} jogadas e em ${relogio.innerHTML} segundos!`);
+
+    let condicao = true;
+    while(condicao === true){
+        resposta = prompt("Deseja reiniciar a partida? (s ou n)");
+        if(resposta === "s"){
+            condicao = false;
+            cartas = [];
+            paresCertos = [];
+            statusClick = false;
+            cartaSelecionada = null;
+            quantidadePares = null;
+            timer = null;
+            jogadas = 0;
+
+            let main = document.querySelector("main");
+            main.innerHTML = "";
+
+            askQuantidade();
+
+        }else if(resposta === "n"){
+            condicao = false;
+        }
+    }
+
 }
 
 function contaTempo(){
