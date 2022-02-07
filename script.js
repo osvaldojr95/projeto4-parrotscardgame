@@ -142,8 +142,11 @@ function jogoTerminou(){
             timer = null;
             jogadas = 0;
 
-            let main = document.querySelector("main");
+            const main = document.querySelector("main");
             main.innerHTML = "";
+            
+            const relogio = document.querySelector(".relogio");
+            relogio.innerHTML = 0;
 
             askQuantidade();
 
